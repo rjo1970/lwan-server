@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+MAINTAINER R.J. Osborne <rjo1970@gmail.com>
+
 RUN apt-get update -qq && \
     apt-get upgrade -y && \
     apt-get install -y build-essential
