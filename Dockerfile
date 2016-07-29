@@ -16,10 +16,15 @@ cmake .. -DCMAKE_BUILD_TYPE=Release && \
 make && \
 strip lwan/lwan && \
 make install
+# Turn on HAProxy PROTO support
+RUN sed -i "s/proxy_protocol = false/proxy_protocol = true/" lwan.conf
 # ------------------------
 
-WORKDIR /lwan
+RUN groupadd -r lwan --gid=999 && useradd -r -g lwan --uid=999 lwan
+USER lwan
+
 EXPOSE 8080
 VOLUME /lwan/wwwroot
 
 CMD ["lwan"]
+
